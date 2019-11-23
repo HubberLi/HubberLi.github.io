@@ -120,7 +120,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    60 字
+                    685 字
                   </span>&nbsp;
                 
 
@@ -128,7 +128,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      1 分钟
+                      2 分钟
                   </span>&nbsp;
                 
 
@@ -161,7 +161,39 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <p>1.war包相当于一个web项目，不需要运行的工程可以打成jar包<br>2.分布式开发：项目大，考虑业务扩展性<br>3.snapshot为快照版本即非正式版本，release为正式发布版本</p>
+            <ul>
+<li>war包相当于一个web项目，不需要运行的工程可以打成jar包</li>
+<li>分布式开发：项目大，考虑业务扩展性</li>
+<li>snapshot为快照版本即非正式版本，release为正式发布版本</li>
+<li>依赖冲突：<blockquote>
+<p>通俗的意思是pom中引入的两个或多个jar包，依赖了同一个但是不同版本的jar包<br>例如:org.apache.struts依赖spirng-beans-3.0.5，spring-context依赖spring-beans-4.2.4，但是发现spirng-beans-3.0.5加入到工程中，而我们希望spring-beans-4.2.4加入工程，这时就会有冲突<br>解决方法有三种：</p>
+<blockquote>
+<p>1.依赖调节原则<br>maven自动按照下边的原则调解：<br>声明者优先原则<br>在pom文件定义依赖，先声明的依赖为准。<br><img src="http://q163ekc72.bkt.clouddn.com/post3.png" srcset="undefined" alt=""><br>测试：<br>如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。<br>分析：<br>由于spring-context在前边，以spring-context依赖的spring-beans-4.2.4为准，所以最终spring-beans-4.2.4添加到了工程中。<br>2.排除依赖<br>上边的问题也可以通过排除依赖方法辅助依赖调解，如下：<br>比如在依赖struts2-spring-plugin的设置中添加排除依赖，排除spring-beans，下边的配置表示：依赖struts2-spring-plugin，但排除struts2-spring-plugin所依赖的spring-beans。</p>
+</blockquote>
+</blockquote>
+<pre><code>  &lt;!-- struts2-spring-plugin依赖spirng-beans-3.0.5 --&gt;
+  &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+      &lt;artifactId&gt;struts2-spring-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.3.24&lt;/version&gt;
+      &lt;!-- 排除 spring-beans--&gt;
+      &lt;exclusions&gt;
+          &lt;exclusion&gt;
+              &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+              &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+          &lt;/exclusion&gt;
+      &lt;exclusion&gt;
+              &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+              &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+          &lt;/exclusion&gt;
+      &lt;/exclusions&gt;
+  &lt;/dependency&gt;</code></pre><blockquote>
+<blockquote>
+<p>3.锁定版本（推荐使用）<br>面对众多的依赖，有一种方法不用考虑依赖路径、声明优化等因素可以采用直接锁定版本的方法确定依赖构件的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定的版本的为准添加到工程中，此方法在企业开发中常用。首先父工程中pom.xml文件添加,如下的配置是锁定了spring-beans和spring-context的版本：<br><img src="http://q163ekc72.bkt.clouddn.com/post2.png" srcset="undefined" alt=""><br>注意：在工程中锁定依赖的版本并不代表在工程中添加了依赖，如果工程需要添加锁定版本的依赖则需要单独添加&lt;dependencies&gt;&lt;/dependencies&gt;标签，如下：<br><img src="http://q163ekc72.bkt.clouddn.com/post1.png" srcset="undefined" alt=""><br>上边添加的依赖并没有指定版本，原因是已在&lt;dependencyManagement&gt;中锁定了版本，所以在&lt;dependency&gt;下不需要再指定版本。</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
 
             <hr>
           </div>
