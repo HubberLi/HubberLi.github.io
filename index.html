@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="http://q163ekc72.bkt.clouddn.com/wallhaven-395w59.jpg">
+  <link rel="icon" type="image/png" href="/img/wallhaven-395w59.jpg">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -148,13 +148,14 @@
         
         <div class="index-excerpt" >
           <div class="index-text mb-1">
+黑科技：使用解压缩的方法，可以删除jar包中不需要的模块
 war包相当于一个web项目，不需要运行的工程可以打成jar包
 分布式开发：项目大，考虑业务扩展性
 snapshot为快照版本即非正式版本，release为正式发布版本
 依赖冲突：
 通俗的意思是pom中引入的两个或多个jar包，依赖了同一个但是不同版本的jar包例如:org.apache.struts依赖spirng-beans-3.0.5，spring-context依赖spring-beans-4.2.4，但是发现spirng-beans-3.0.5加入到工程中，而我们希望spring-beans-4.2.4加入工程，这时就会有冲突解决方法有三种：
 
-1.依赖调节原则maven自动按照下边的原则调解：声明者优先原则在pom文件定义依赖，先声明的依赖为准。测试：如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。分析：由于spring-context在前边，以spring-context依赖的spring-beans-4.2.4为准</div>
+1.依赖调节原则maven自动按照下边的原则调解：声明者优先原则在pom文件定义依赖，先声明的依赖为准。测试：如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。分析：由于spring-context在前边，以spring-c</div>
         </div>
       </a>
 
