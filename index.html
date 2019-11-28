@@ -134,8 +134,95 @@
     
     
     <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/28/%E7%BA%BF%E7%A8%8B/">
+        <p class="h4 index-header">线程</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">什么是线程？运行的程序是一个进程，而线程是进程中最小的执行单位，一个进程至少包含一个线程。
+
+
+串行：就拿酷狗来说，我选择了多个音乐下载，但一次只能下载一个，下载完这个，才能下载下一个
+并行：并行可以同时下载多个歌曲
+
+
+什么是线程安全？借鉴网上看到的话：存在竞争的线程不安全，不存在竞争的线程就是安全的！
+当多个线程访问某个方法时，不管你通过怎样的调用方式或者说这些线程如何交替的执行，我们在主程序中不需要去做任何的同步，这个类的结果行为都是我们设想的正确行为，那么我们就可以说这个类时线程安全的。
+线程安全实现的方法：互斥同步(阻塞同步)
+在多个线程并发访问数据时，保证共享数据在同一个时刻只能被一个线程使用，主要的互斥同步手段有：
+
+synchronized关键字
+重入锁（ReentrantLock）
+
+
+非阻塞同步
+该方法采用基于冲突检测的乐观并发策略。每个线程先进行操作，如果没有其他线程争用共享数据，则操作成功。如果共享数据有争用，产生冲突，那就再采取其他的补偿措施。
+
+CAS（compare and swap）
+
+
+参考文献：https://blog.csdn.net/weixin</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/11/28/%E6%8A%80%E5%B7%A7/" target="_self">
+          <img src="https://w.wallhaven.cc/full/48/wallhaven-48l121.jpg" srcset="undefined" alt="小技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/28/%E6%8A%80%E5%B7%A7/">
+        <p class="h4 index-header">小技巧</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">
+使用解压缩的方法，可以删除jar包中不需要的模块
+
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/11/27/%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B92/" target="_self">
+          <img src="https://w.wallhaven.cc/full/73/wallhaven-73x77o.jpg" srcset="undefined" alt="开发常识" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
       <a href="/2019/11/27/%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B92/">
-        <p class="h4 index-header">零散知识点2</p>
+        <p class="h4 index-header">开发常识</p>
         
         
           
@@ -143,7 +230,9 @@
         <div class="index-excerpt" >
           <div class="index-text mb-1">
 maven是项目管理工具，svn是版本管理工具
-
+snapshot为快照版本即非正式版本，release为正式发布版本
+war包相当于一个web项目，不需要运行的工程可以打成jar包
+为什么用分布式开发：项目大，考虑业务扩展性
 
 </div>
         </div>
@@ -171,27 +260,21 @@ maven是项目管理工具，svn是版本管理工具
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/11/20/%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9/" target="_self">
-          <img src="https://w.wallhaven.cc/full/wy/wallhaven-wy3xv6.jpg" srcset="undefined" alt="零散知识点" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://w.wallhaven.cc/full/wy/wallhaven-wy3xv6.jpg" srcset="undefined" alt="依赖冲突" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
       <a href="/2019/11/20/%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86%E7%82%B9/">
-        <p class="h4 index-header">零散知识点</p>
+        <p class="h4 index-header">依赖冲突</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">
-黑科技：使用解压缩的方法，可以删除jar包中不需要的模块
-war包相当于一个web项目，不需要运行的工程可以打成jar包
-分布式开发：项目大，考虑业务扩展性
-snapshot为快照版本即非正式版本，release为正式发布版本
-依赖冲突：
-通俗的意思是pom中引入的两个或多个jar包，依赖了同一个但是不同版本的jar包例如:org.apache.struts依赖spirng-beans-3.0.5，spring-context依赖spring-beans-4.2.4，但是发现spirng-beans-3.0.5加入到工程中，而我们希望spring-beans-4.2.4加入工程，这时就会有冲突解决方法有三种：
+          <div class="index-text mb-1">依赖冲突：通俗的意思是pom中引入的两个或多个jar包，依赖了同一个但是不同版本的jar包例如:org.apache.struts依赖spirng-beans-3.0.5，spring-context依赖spring-beans-4.2.4，但是发现spirng-beans-3.0.5加入到工程中，而我们希望spring-beans-4.2.4加入工程，这时就会有冲突解决方法有三种：
 
-1.依赖调节原则maven自动按照下边的原则调解：声明者优先原则在pom文件定义依赖，先声明的依赖为准。测试：如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。分析：由于spring-context在前边，以spring-c</div>
+1.依赖调节原则maven自动按照下边的原则调解：声明者优先原则在pom文件定义依赖，先声明的依赖为准。测试：如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。分析：由于spring-context在前边，以spring-context依赖的spring-beans-4.2.4为准，所以最终spring-beans-4.2.4添加到了工程中。2.排除依赖上边的问题也可以通过排除依赖方法辅助依赖调解，如下：比如在依赖struts2-spring-plug</div>
         </div>
       </a>
 
