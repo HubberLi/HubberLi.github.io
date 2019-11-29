@@ -15,7 +15,7 @@
   <meta name="description" content="个人博客">
   <meta name="author" content="Hugger LI">
   <meta name="keywords" content="">
-  <title>标签 - svn ~ ^-^</title>
+  <title>依赖冲突 ~ ^-^</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -96,7 +96,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('http://q163ekc72.bkt.clouddn.com/wallhaven-748466.jpg')no-repeat center center;
+         style="background: url('http://q163ekc72.bkt.clouddn.com/wallhaven-zx7vyw.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -106,6 +106,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期三, 十一月 20日 2019, 11:13 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    627 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -117,35 +152,113 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 1 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/11/27/%E5%BC%80%E5%8F%91%E5%B8%B8%E8%AF%86/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">开发常识</span>
-      <span style="float: right;">11-27</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h3 id="依赖冲突："><a href="#依赖冲突：" class="headerlink" title="依赖冲突："></a>依赖冲突：</h3><p>通俗的意思是pom中引入的两个或多个jar包，依赖了同一个但是不同版本的jar包<br>例如:org.apache.struts依赖spirng-beans-3.0.5，spring-context依赖spring-beans-4.2.4，但是发现spirng-beans-3.0.5加入到工程中，而我们希望spring-beans-4.2.4加入工程，这时就会有冲突<br>解决方法有三种：</p>
+<blockquote>
+<p>1.依赖调节原则<br>maven自动按照下边的原则调解：<br>声明者优先原则<br>在pom文件定义依赖，先声明的依赖为准。<br><img src="https://img-blog.csdnimg.cn/20191124004451607.png" srcset="undefined" alt=""><br>测试：<br>如果将上边struts-spring-plugins和spring-context顺序颠倒(类比图片中的junit4.12和junit4.10的顺序颠倒)，系统将导入spring-beans-4.2.4。<br>分析：<br>由于spring-context在前边，以spring-context依赖的spring-beans-4.2.4为准，所以最终spring-beans-4.2.4添加到了工程中。<br>2.排除依赖<br>上边的问题也可以通过排除依赖方法辅助依赖调解，如下：<br>比如在依赖struts2-spring-plugin的设置中添加排除依赖，排除spring-beans，下边的配置表示：依赖struts2-spring-plugin，但排除struts2-spring-plugin所依赖的spring-beans。</p>
+</blockquote>
+<pre><code>    &lt;!-- struts2-spring-plugin依赖spirng-beans-3.0.5 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+        &lt;artifactId&gt;struts2-spring-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.3.24&lt;/version&gt;
+        &lt;!-- 排除 spring-beans--&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;
+                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;exclusion&gt;
+                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;</code></pre><blockquote>
+<p>3.锁定版本（推荐使用）<br>面对众多的依赖，有一种方法不用考虑依赖路径、声明优化等因素可以采用直接锁定版本的方法确定依赖构件的版本，版本锁定后则不考虑依赖的声明顺序或依赖的路径，以锁定的版本的为准添加到工程中，此方法在企业开发中常用。首先父工程中pom.xml文件添加,如下的配置是锁定了spring-beans和spring-context的版本：<br><img src="https://img-blog.csdnimg.cn/20191124004439700.png" srcset="undefined" alt=""><br>注意：在工程中锁定依赖的版本并不代表在工程中添加了依赖，如果工程需要添加锁定版本的依赖则需要单独添加&lt;dependencies&gt;&lt;/dependencies&gt;标签，如下：<br><img src="https://img-blog.csdnimg.cn/20191124004426207.png" srcset="undefined" alt=""><br>上边添加的依赖并没有指定版本，原因是已在&lt;dependencyManagement&gt;中锁定了版本，所以在&lt;dependency&gt;下不需要再指定版本。</p>
+</blockquote>
 
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/maven">maven</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'false' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "o97QJ0UsAkv70rRwkQlKMoKB-gzGzoHsz",
+        app_key: "oqisNTRSHI0bQttHiNwbLtcp",
+        placeholder: "说点什么",
+        avatar: "robohash",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -220,6 +333,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
@@ -260,7 +378,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签 - svn&nbsp;",
+        "依赖冲突&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
