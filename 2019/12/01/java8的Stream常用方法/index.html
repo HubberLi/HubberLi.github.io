@@ -15,7 +15,7 @@
   <meta name="description" content="个人博客">
   <meta name="author" content="Hugger LI">
   <meta name="keywords" content="">
-  <title>小技巧 ~ ^-^</title>
+  <title>java8的Stream常用方法 ~ ^-^</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -96,7 +96,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://w.wallhaven.cc/full/13/wallhaven-13oe2v.jpg')no-repeat center center;
+         style="background: url('https://w.wallhaven.cc/full/45/wallhaven-458gm9.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -111,7 +111,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期四, 十一月 28日 2019, 9:03 晚上
+                  星期日, 十二月 1日 2019, 8:25 晚上
                 </p>
               
 
@@ -120,7 +120,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    21 字
+                    148 字
                   </span>&nbsp;
                 
 
@@ -161,9 +161,12 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <ul>
-<li>使用解压缩的方法，可以删除jar包中不需要的模块<br><img src="https://img-blog.csdnimg.cn/20191125210421514.png" srcset="undefined" alt=""></li>
+            <p>Stream的原理：将要处理的元素看做一种流，流在管道中传输，并且可以在管道的节点上处理，包括过滤筛选、去重、排序、聚合等。元素流在管道中经过中间操作的处理，最后由最终操作得到前面处理的结果。<br>集合有两种方式生成流：</p>
+<ul>
+<li>stream() − 为集合创建串行流</li>
+<li>parallelStream() - 为集合创建并行流</li>
 </ul>
+<p>具体参考：<a href="https://mp.weixin.qq.com/s?__biz=MzUxOTc4NjEyMw==&amp;mid=2247484956&amp;idx=1&amp;sn=ef4a5b439131f1ecac4147484fee0bf3&amp;chksm=f9f51df8ce8294eef440ded1e6b630bcecd8dc79b9b7ecb63541a784e8f102aefeb4179ea97a&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1569841768161&amp;sharer_shareid=ca2f42d376cd7fbffb2cc2d7886792e7#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzUxOTc4NjEyMw==&amp;mid=2247484956&amp;idx=1&amp;sn=ef4a5b439131f1ecac4147484fee0bf3&amp;chksm=f9f51df8ce8294eef440ded1e6b630bcecd8dc79b9b7ecb63541a784e8f102aefeb4179ea97a&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1569841768161&amp;sharer_shareid=ca2f42d376cd7fbffb2cc2d7886792e7#rd</a></p>
 
             <hr>
           </div>
@@ -174,11 +177,20 @@
               <span>
                 <i class="iconfont icon-inbox"></i>
                 
-                  <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91">开发</a>
+                  <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF">后端</a>
                   &nbsp;
                 
               </span>&nbsp;&nbsp;
             
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/stream">stream</a>
+                
+                  <a class="hover-with-bg" href="/tags/lambda">lambda</a>
+                
+              </span>
             
             </p>
             
@@ -359,7 +371,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "小技巧&nbsp;",
+        "java8的Stream常用方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
