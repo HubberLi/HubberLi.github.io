@@ -120,7 +120,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    223 字
+                    323 字
                   </span>&nbsp;
                 
 
@@ -171,7 +171,7 @@
 <li>dubbox是需要部署和安装的</li>
 <li>用了dubbox，@service引入到spring容器的需要的包是com.alibaba而不是spring了</li>
 <li>加@service的实现类，会把这个实现类的服务加入到注册中心去（zookeeper）</li>
-<li>spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。 </li>
+<li>spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。<br><img src="https://img-blog.csdnimg.cn/20191215215650561.png" srcset="undefined" alt="易惠项目1"><br>1图中，service工程中，第一行代表注册到服中心的服务名称，第二行配置服务中心ip和端口号，第三行配置dubbox要扫描的包，这里要扫描的是服务，要加入到注册中心的。<br><img src="https://img-blog.csdnimg.cn/20191215220328688.png" srcset="undefined" alt="易惠项目2"><br>2图中前两行与service相同，第三行也是扫描包的意思，这里扫描的是需要引入服务的包</li>
 </ol>
 </blockquote>
 </li>
