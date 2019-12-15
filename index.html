@@ -133,6 +133,51 @@
   <div class="row mb-4 mx-auto">
     
     
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/15/%E6%98%93%E6%83%A0%E9%A1%B9%E7%9B%AE/">
+        <p class="h4 index-header">易惠项目</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">
+服务层之间通过activeMQ（消息中间件）通讯
+服务管理(或服务注册中心）：zookeeper
+@responsebody以json格式返回
+有控制层的，需要在web.xml中加入filter过滤乱码同时在 cotroller层，注入 service 也不能用 @Autoware 而是用 @Renfencedubbox
+
+dubbox是个服务框架，如果没有分布式的需求，其实是不需要用的，只有在分布式的时候，才有dubbox这样的分布式框架的需求。（dubbox用来替代webservice，webservice比较老了）
+dubbox是需要部署和安装的
+用了dubbox，@service引入到spring容器的需要的包是com.alibaba而不是spring了
+加@service的实现类，会把这个实现类的服务加入到注册中心去（zookeeper）
+spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。 
+
+
+
+
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-15&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/dubbox">dubbox</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/12/01/java8%E7%9A%84Stream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
           <img src="https://w.wallhaven.cc/full/45/wallhaven-458gm9.jpg" srcset="undefined" alt="java8的Stream常用方法" class="img-fluid rounded z-depth-3 index-thumbnails">

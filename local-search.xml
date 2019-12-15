@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>易惠项目</title>
+    <link href="undefined2019/12/15/%E6%98%93%E6%83%A0%E9%A1%B9%E7%9B%AE/"/>
+    <url>2019/12/15/%E6%98%93%E6%83%A0%E9%A1%B9%E7%9B%AE/</url>
+    
+    <content type="html"><![CDATA[<ul><li>服务层之间通过activeMQ（消息中间件）通讯</li><li>服务管理(或服务注册中心）：zookeeper</li><li>@responsebody以json格式返回</li><li>有控制层的，需要在web.xml中加入filter过滤乱码<br>同时在 cotroller层，注入 service 也不能用 @Autoware 而是用 @Renfence<h3 id="dubbox"><a href="#dubbox" class="headerlink" title="dubbox"></a>dubbox</h3><blockquote><ol><li>dubbox是个服务框架，如果没有分布式的需求，其实是不需要用的，只有在分布式的时候，才有dubbox这样的分布式框架的需求。（dubbox用来替代webservice，webservice比较老了）</li><li>dubbox是需要部署和安装的</li><li>用了dubbox，@service引入到spring容器的需要的包是com.alibaba而不是spring了</li><li>加@service的实现类，会把这个实现类的服务加入到注册中心去（zookeeper）</li><li>spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。 </li></ol></blockquote></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>dubbox</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>java8的Stream常用方法</title>
     <link href="undefined2019/12/01/java8%E7%9A%84Stream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <url>2019/12/01/java8%E7%9A%84Stream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>

@@ -15,7 +15,7 @@
   <meta name="description" content="个人博客">
   <meta name="author" content="Hugger LI">
   <meta name="keywords" content="">
-  <title>标签 ~ ^-^</title>
+  <title>易惠项目 ~ ^-^</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -96,7 +96,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('http://q163ekc72.bkt.clouddn.com/wallhaven-748466.jpg')no-repeat center center;
+         style="background: url('http://q163ekc72.bkt.clouddn.com/wallhaven-zx7vyw.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -106,6 +106,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十二月 15日 2019, 12:54 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    223 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      1 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -117,22 +152,105 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/dubbox/" style="font-size: 15px; color: #bbe">dubbox</a> <a href="/tags/hexo/" style="font-size: 15px; color: #bbe">hexo</a> <a href="/tags/lambda/" style="font-size: 15px; color: #bbe">lambda</a> <a href="/tags/maven/" style="font-size: 30px; color: #337ab7">maven</a> <a href="/tags/stream/" style="font-size: 15px; color: #bbe">stream</a> <a href="/tags/svn/" style="font-size: 15px; color: #bbe">svn</a> <a href="/tags/thread/" style="font-size: 15px; color: #bbe">thread</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <ul>
+<li>服务层之间通过activeMQ（消息中间件）通讯</li>
+<li>服务管理(或服务注册中心）：zookeeper</li>
+<li>@responsebody以json格式返回</li>
+<li>有控制层的，需要在web.xml中加入filter过滤乱码<br>同时在 cotroller层，注入 service 也不能用 @Autoware 而是用 @Renfence<h3 id="dubbox"><a href="#dubbox" class="headerlink" title="dubbox"></a>dubbox</h3><blockquote>
+<ol>
+<li>dubbox是个服务框架，如果没有分布式的需求，其实是不需要用的，只有在分布式的时候，才有dubbox这样的分布式框架的需求。（dubbox用来替代webservice，webservice比较老了）</li>
+<li>dubbox是需要部署和安装的</li>
+<li>用了dubbox，@service引入到spring容器的需要的包是com.alibaba而不是spring了</li>
+<li>加@service的实现类，会把这个实现类的服务加入到注册中心去（zookeeper）</li>
+<li>spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。 </li>
+</ol>
+</blockquote>
+</li>
+</ul>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/dubbox">dubbox</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var notify = 'false' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "o97QJ0UsAkv70rRwkQlKMoKB-gzGzoHsz",
+        app_key: "oqisNTRSHI0bQttHiNwbLtcp",
+        placeholder: "说点什么",
+        avatar: "robohash",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -207,6 +325,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
@@ -247,7 +370,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签&nbsp;",
+        "易惠项目&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
