@@ -151,13 +151,14 @@
 服务层之间通过activeMQ（消息中间件）通讯
 服务管理(或服务注册中心）：zookeeper
 @responsebody以json格式返回
-有控制层的，需要在web.xml中加入filter过滤乱码同时在 cotroller层，注入 service 也不能用 @Autoware 而是用 @Renfencedubbox
+有控制层的，需要在web.xml中加入filter过滤乱码
+maven项目新建模块要new一个maven model，不是new一个projectdubbox
 
 dubbox是个服务框架，如果没有分布式的需求，其实是不需要用的，只有在分布式的时候，才有dubbox这样的分布式框架的需求。（dubbox用来替代webservice，webservice比较老了）
 dubbox是需要部署和安装的
 用了dubbox，@service引入到spring容器的需要的包是com.alibaba而不是spring了
 加@service的实现类，会把这个实现类的服务加入到注册中心去（zookeeper）
-spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用 com.alibaba.dubbo 的@service才能识别。1图中，service工程中，第一行代</div>
+spring中的@service用于将服务类交给spring管理。dubbox中不能识别@service，会报空指针。这个时候需要使用com.alibaba.dubbo的@service才能识别。同时在cotroller层，注入 service也不能用@Au</div>
         </div>
       </a>
 
@@ -165,6 +166,11 @@ spring中的@service用于将服务类交给spring管理。dubbox中不能识别
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-15&nbsp;&nbsp;
         
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%BC%80%E5%8F%91">开发</a>&nbsp;
+          &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
