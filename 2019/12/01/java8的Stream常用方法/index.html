@@ -15,7 +15,7 @@
   <meta name="description" content="个人博客">
   <meta name="author" content="Hugger LI">
   <meta name="keywords" content="">
-  <title>java8的Stream常用方法 ~ 来玩儿啊</title>
+  <title>新知识点 ~ 来玩儿啊</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -120,7 +120,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    148 字
+                    902 字
                   </span>&nbsp;
                 
 
@@ -128,7 +128,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      1 分钟
+                      3 分钟
                   </span>&nbsp;
                 
 
@@ -161,12 +161,81 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <p>Stream的原理：将要处理的元素看做一种流，流在管道中传输，并且可以在管道的节点上处理，包括过滤筛选、去重、排序、聚合等。元素流在管道中经过中间操作的处理，最后由最终操作得到前面处理的结果。<br>集合有两种方式生成流：</p>
+            <h1 id="java8-Stream常用方法"><a href="#java8-Stream常用方法" class="headerlink" title="java8 Stream常用方法"></a>java8 Stream常用方法</h1><p>Stream的原理：将要处理的元素看做一种流，流在管道中传输，并且可以在管道的节点上处理，包括过滤筛选、去重、排序、聚合等。元素流在管道中经过中间操作的处理，最后由最终操作得到前面处理的结果。<br>集合有两种方式生成流：</p>
 <ul>
 <li>stream() − 为集合创建串行流</li>
 <li>parallelStream() - 为集合创建并行流</li>
 </ul>
 <p>具体参考：<a href="https://mp.weixin.qq.com/s?__biz=MzUxOTc4NjEyMw==&amp;mid=2247484956&amp;idx=1&amp;sn=ef4a5b439131f1ecac4147484fee0bf3&amp;chksm=f9f51df8ce8294eef440ded1e6b630bcecd8dc79b9b7ecb63541a784e8f102aefeb4179ea97a&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1569841768161&amp;sharer_shareid=ca2f42d376cd7fbffb2cc2d7886792e7#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzUxOTc4NjEyMw==&amp;mid=2247484956&amp;idx=1&amp;sn=ef4a5b439131f1ecac4147484fee0bf3&amp;chksm=f9f51df8ce8294eef440ded1e6b630bcecd8dc79b9b7ecb63541a784e8f102aefeb4179ea97a&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1569841768161&amp;sharer_shareid=ca2f42d376cd7fbffb2cc2d7886792e7#rd</a></p>
+<h1 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h1><h2 id="1-通过注解校验数据"><a href="#1-通过注解校验数据" class="headerlink" title="1.通过注解校验数据"></a>1.通过注解校验数据</h2><pre><code>public class Student {
+
+    @NotNull(message = &quot;传入的姓名为null，请传值&quot;)
+    @NotEmpty(message = &quot;传入的姓名为空字符串，请传值&quot;)
+    private String name; //姓名
+
+    @NotNull(message = &quot;传入的分数为null，请传值&quot;)
+    @Min(value = 0,message = &quot;传入的学生成绩有误，分数应该在0~100之间&quot;)
+    @Max(value = 100,message = &quot;传入的学生成绩有误，分数应该在0~100之间&quot;)
+    private String score; //分数
+
+    @NotNull(message = &quot;传入的电话为null，请传值&quot;)
+    @NotEmpty(message = &quot;传入的电话为空字符串，请传值&quot;)
+    @Length(min = 11,max = 11,message = &quot;传入的电话号码长度有误，必须为11位&quot;)
+    private String mobile; //电话号码
+}
+</code></pre><p>当然，于此同时，我们还需要在对象入口处，加上注解 @Valid来开启对传入 Student对象的验证工作：</p>
+<pre><code>@PostMapping(&quot;/add&quot;)
+public String addStudent( @ResponseBody @Valid Student student ) {
+
+    studentService.addStudent( student ); // 将student对象存入MySQL数据库
+    return &quot;SUCCESS&quot;;
+}</code></pre><h2 id="2-数据异常统一拦截"><a href="#2-数据异常统一拦截" class="headerlink" title="2.数据异常统一拦截"></a>2.数据异常统一拦截</h2><p>配置全局统一异常拦截器来格式化所有数据校验的返回结果。</p>
+<pre><code>@Controller
+@ResponseBody
+public class GlobalExceptionInterceptor {
+
+    @ExceptionHandler(value = Exception.calss)
+    public String exceptionHandler(HttpServletRequest request,Exception e) {
+    String failMsg = null;
+    if (e instanceof MethodArgumentNotValidException) {
+    // 拿到参数校验具体异常信息提示
+    failMsg = ((MethodArgumentNotValidException) e).getBindingResult().getFieldError().getDefaultMessage();
+        }
+    return failMsg;// 直接返回给前端
+    }
+}</code></pre><p>如上面代码所示，我们全局统一拦截了<strong>参数校验异常MethodArgumentNotValidException</strong>，并仅仅只拿到对应异常的详细 Message信息吐给前端，此时返回给前端的数据就清楚得多。</p>
+<p>具体参考：<a href="https://mp.weixin.qq.com/s/WQ-2fPOxk0GvSHiRR5-kQw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/WQ-2fPOxk0GvSHiRR5-kQw</a></p>
+<h1 id="LocalDateTime-线程安全"><a href="#LocalDateTime-线程安全" class="headerlink" title="LocalDateTime(线程安全)"></a>LocalDateTime(线程安全)</h1><h2 id="1-获取当前的时间"><a href="#1-获取当前的时间" class="headerlink" title="1.获取当前的时间"></a>1.获取当前的时间</h2><pre><code>LocalDateTime rightnow = LocalDateTime.now();
+当前时刻：rightnow
+当前年份：rightnow.getYear();
+当前月份：rightnow.getMonth();
+当前日份：rightnow.getDayofMonth();
+当前时：rightnow.getHour();
+当前分：rightnow.getMinute();
+当前秒：rightnow.getSecond();</code></pre><h2 id="2-构造一个指定年、月、日的时间"><a href="#2-构造一个指定年、月、日的时间" class="headerlink" title="2.构造一个指定年、月、日的时间"></a>2.构造一个指定年、月、日的时间</h2><pre><code>LocalDateTime beforeDate = LocalDateTime.of(2019, Month.DECEMBER, 12, 9, 21, 32);</code></pre><h2 id="3-修改日期"><a href="#3-修改日期" class="headerlink" title="3.修改日期"></a>3.修改日期</h2><pre><code>LocalDateTime rightNow = LocalDateTime.now();
+
+rightNow = rightNow.minusYears( 2 );  // 减少 2 年
+rightNow = rightNow.plusMonths( 3 );  // 增加 3 个月
+
+rightNow = rightNow.withYear( 2008 ); // 直接修改年份到2008年
+rightNow = rightNow.withHour( 13 );   // 直接修改小时到13时</code></pre><h2 id="4-格式化日期"><a href="#4-格式化日期" class="headerlink" title="4.格式化日期"></a>4.格式化日期</h2><pre><code>LocalDateTime rightNow = LocalDateTime.now();
+
+String result1 = rightNow.format( DateTimeFormatter.ISO_DATE );
+String result2 = rightNow.format( DateTimeFormatter.BASIC_ISO_DATE );
+String result3 = rightNow.format( DateTimeFormatter.ofPattern(&quot;yyyy/MM/dd&quot;) );
+
+System.out.println(&quot;格式化后的日期(基本样式一举例)：&quot; + result1);
+System.out.println(&quot;格式化后的日期(基本样式二举例)：&quot; + result2);
+System.out.println(&quot;格式化后的日期(自定义样式举例)：&quot; +result3);
+
+// 输出结果：
+格式化后的日期(基本样式一举例)：2019-12-13
+格式化后的日期(基本样式二举例)：20191213
+格式化后的日期(自定义样式举例)：2019/12/13</code></pre><h2 id="5-时间反解析"><a href="#5-时间反解析" class="headerlink" title="5.时间反解析"></a>5.时间反解析</h2><pre><code>LocalDateTime time = LocalDateTime.parse(&quot;2002--01--02 11:21&quot;,DateTimeFormatter.ofPattern(&quot;yyyy--MM--dd HH:mm&quot;));
+System.out.println(&quot;字符串反解析后的时间为：&quot; + time);
+
+// 输出：
+字符串反解析后的时间为：2002-01-02T11:21</code></pre><p>具体参考：<a href="https://mp.weixin.qq.com/s/v-Va_GuSUGr9HVAW84kloQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/v-Va_GuSUGr9HVAW84kloQ</a></p>
 
             <hr>
           </div>
@@ -371,7 +440,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "java8的Stream常用方法&nbsp;",
+        "新知识点&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
